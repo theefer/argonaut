@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <title>Demo</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js"></script>
+  <!-- <script src="https://raw.github.com/ded/reqwest/master/reqwest.min.js"></script> -->
+  <script>
+    require.config({
+      paths: {
+        reqwest: 'https://raw.github.com/ded/reqwest/master/reqwest.min'
+      }
+    });
+    require(['/src/api.js', '/src/http/reqwest.js'], function(Api, httpReqwest) {
+      window.Api = Api;
+      window.api = new Api('http://tag.guardianapis.com/', {
+        httpAdapter: httpReqwest,
+        syncData: true
+      });
+
+      var root = api.root();
+      root.get().then(function() {
+        var tags = root.follow('tags');
+        tags.get().then(function(tagsData) {
+          console.log(tagsData.data)
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Demo</h1>
+</body>
+</html>
