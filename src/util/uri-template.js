@@ -12,6 +12,11 @@ define(function() {
     /**
      * Apply a URI template to a set of parameters.
      *
+     * This is an incomplete implementation of RFC 6570.
+     *
+     * See the RFC for reference:
+     * http://tools.ietf.org/html/rfc6570
+     *
      * @param {string} template URI template string
      * @param {object} params   Key-value map of URI parameters
      * @return
@@ -27,8 +32,7 @@ define(function() {
                         if (! validValueType(val)) {
                             throw new Error("Invalid type for URI template parameter: " + varName);
                         }
-                        // TODO: url encode?
-                        return varName + '=' + val;
+                        return varName + '=' + encodeURIComponent(val);
                     }
                 }).filter(truthy);
                 if (query.length > 0) {
@@ -39,13 +43,13 @@ define(function() {
             }).
             replace(/\{(.*?)\}/g, function(match, varName) {
                 var val = params[varName];
-                if (!val) {
+                if (typeof val === 'undefined') {
                     throw new Error("Missing parameter for URI template variable: " + varName);
                 }
                 if (! validValueType(val)) {
                     throw new Error("Invalid type for URI template parameter: " + varName);
                 }
-                return val;
+                return encodeURIComponent(val);
             });
     }
 
