@@ -4,9 +4,6 @@ var specs = Object.keys(window.__karma__.files).filter(function (file) {
 
 require.config({
     baseUrl: '/base/src',
-    // paths: {
-    //     'test': '/base/test'
-    // },
 
     // ask Require.js to load these files (all our tests)
     deps: specs,

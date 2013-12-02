@@ -1,4 +1,4 @@
-define(['/base/src/api.js', 'chai'], function(Api, chai) {
+define(['/base/src/api.js'], function(Api) {
 
     describe('Api', function() {
 

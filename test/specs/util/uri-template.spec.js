@@ -1,5 +1,5 @@
-define(['/base/src/util/uri-template.js', 'chai'],
-       function(uriTemplate, chai) {
+define(['/base/src/util/uri-template.js'],
+       function(uriTemplate) {
 
     describe('uriTemplate', function() {
 
