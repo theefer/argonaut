@@ -2,13 +2,23 @@ define(['./util/uri-template.js'], function(uriTemplate) {
 
     function ResourceFactory(options) {
 
+        options = options || {};
+
+        if (! options.http) {
+            throw new Error('Missing http option when creating ResourceFactory');
+        }
+
         var http = options.http;
         var syncData = options.syncData;
 
         function Resource(uri, data) {
+            if (! uri) {
+                throw new Error('Missing URI parameter when creating Resource');
+            }
+
             this.uri = uri;
 
-            if (typeof this.data !== 'undefined') {
+            if (typeof data !== 'undefined') {
                 this.data = data;
             }
         }

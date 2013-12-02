@@ -4,7 +4,6 @@ define(['./resource.js', './http/base.js'], function(ResourceFactory, Http) {
      * @param {object} options 
      */
     function Api(uri, options) {
-        this.uri = uri;
 
         options = options || {};
 
@@ -15,6 +14,8 @@ define(['./resource.js', './http/base.js'], function(ResourceFactory, Http) {
         if (! options.httpAdapter) {
             throw new Error('Missing httpAdapter option when creating Api');
         }
+
+        this.uri = uri;
 
         this.Resource = ResourceFactory({
             // http: new Http(options.httpAdapter, options)
