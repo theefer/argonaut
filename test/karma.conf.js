@@ -11,7 +11,7 @@ module.exports = function(config) {
     // frameworks to use
     // frameworks: ['mocha', 'chai', 'chai-as-promised', 'requirejs'],
     // Warning: requirejs must come first, for some crazy reason
-    frameworks: ['requirejs', 'mocha', 'chai'],
+    frameworks: ['requirejs', 'mocha', 'chai', 'sinon-chai'],
 
 
     // list of files / patterns to load in the browser
