@@ -1,17 +1,20 @@
-define(['./util/uri-template.js'], function(uriTemplate) {
+define(['./util/extractor.js', './util/uri-template.js'],
+       function(ExtractorFactory, uriTemplate) {
 
     function ResourceFactory(options) {
 
         options = options || {};
 
-        if (! options.http) {
-            throw new Error('Missing http option when creating ResourceFactory');
-        }
-
         var http = options.http;
         var syncData = options.syncData;
 
-        function Resource(uri, data) {
+        if (! http) {
+            throw new Error('Missing http option when calling ResourceFactory');
+        }
+
+        var extract = ExtractorFactory({Resource: Resource});
+
+        function Resource(uri, data, links) {
             if (! uri) {
                 throw new Error('Missing URI parameter when creating Resource');
             }
@@ -21,6 +24,10 @@ define(['./util/uri-template.js'], function(uriTemplate) {
             if (typeof data !== 'undefined') {
                 this.data = data;
             }
+
+            if (typeof links !== 'undefined') {
+                this.links = links;
+            }
         }
 
         // Resource.prototype = Object.create(..)
@@ -28,15 +35,16 @@ define(['./util/uri-template.js'], function(uriTemplate) {
 
         Resource.prototype.get = function(params) {
             return http.get(this.uri, params).then(function(resp) {
-                // FIXME: plain data vs entity?
+                // parse returned entities
+                var extracted = extract(resp.body, this.uri);
+
+                // FIXME: iff an entity?
                 if (syncData) {
-                    this.data = resp.body.data;
-                    this.links = resp.body.links;
+                    this.data = extracted.data;
+                    this.links = extracted.links;
                 }
 
-                // this._contentType = resp.contentType;
-                // FIXME: as entity?
-                return resp.body;
+                return extracted;
             }.bind(this));
         };
 
@@ -47,8 +55,8 @@ define(['./util/uri-template.js'], function(uriTemplate) {
             }
 
             return http.post(this.uri, data, params).then(function(resp) {
-                return resp.body;
-            });
+                return extract(resp.body, this.uri);
+            }.bind(this));
         };
 
         Resource.prototype.put = function(data) {
@@ -58,8 +66,9 @@ define(['./util/uri-template.js'], function(uriTemplate) {
             }
 
             return http.put(this.uri, data).then(function(resp) {
+                var extracted = extract(resp.body, this.uri);
                 // this.data = resp.body;
-                return resp.body;
+                return extracted;
             });
         };
 
