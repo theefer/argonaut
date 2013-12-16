@@ -14,12 +14,12 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
 
         it('should throw an exception if called without an http adapter', function() {
             (function() {
-                new ResourceFactory();
-            }).should.throw(Error, 'Missing http option when creating ResourceFactory');
+                ResourceFactory();
+            }).should.throw(Error, 'Missing http option when calling ResourceFactory');
         });
 
         it('should return a Resource constructor', function() {
-            var Resource = new ResourceFactory({
+            var Resource = ResourceFactory({
                 http: mockHttp()
             });
 
@@ -34,7 +34,7 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
             var Resource;
 
             beforeEach(function() {
-                Resource = new ResourceFactory({
+                Resource = ResourceFactory({
                     http: mockHttp()
                 });
             });
@@ -75,7 +75,7 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
 
                 beforeEach(function() {
                     http = mockHttp();
-                    Resource = new ResourceFactory({
+                    Resource = ResourceFactory({
                         http: http
                     });
                     resource = new Resource('http://example.com/api');
