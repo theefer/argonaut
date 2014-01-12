@@ -19,7 +19,7 @@
 
       var root = api.root();
       root.get().then(function() {
-        var tags = root.follow('tags');
+        var tags = root.follow('tags', {query: 'mona'});
         tags.get().then(function(tagsData) {
           console.log(tagsData.data)
         });
