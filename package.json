@@ -1,7 +1,7 @@
 {
-  "name": "argonaut",
+  "name": "argonaut-client",
   "version": "0.1.0",
-  "description": "A simple client for the argo hypermedia type",
+  "description": "A hypermedia client library for the argo media type",
   "main": "index.js",
   "dependencies": {
     "karma": "~0.10.4",
@@ -23,5 +23,5 @@
     "test": "node_modules/karma/bin/karma start test/karma.conf.js --single-run true"
   },
   "author": "Sébastien Cevey <seb@cine7.net>",
-  "license": "Apache 2"
+  "license": "GPL"
 }
