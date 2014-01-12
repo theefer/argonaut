@@ -1,10 +1,13 @@
 define([
     '/base/src/util/extractor.js',
-    '/base/src/resource.js'
+    '/base/src/resource.js',
+    'chai'
 ], function(
     ExtractorFactory,
-    ResourceFactory
+    ResourceFactory,
+    chai
 ) {
+    var should = chai.should();
 
     describe('ExtractorFactory', function() {
 
@@ -168,6 +171,11 @@ define([
                     extracted.data.arr[1].uri.should.equal('/nested-entity2');
                     extracted.data.arr[1].data.should.equal('nested');
                     extracted.data.arr[1].links.should.deep.equal([{rel: 'nested-rel', href: '/link'}]);
+
+                    extracted.data.obj.deep.should.be.instanceof(mockResource);
+                    extracted.data.obj.deep.uri.should.equal('/deep-entity');
+                    extracted.data.obj.deep.data.should.deep.equal({a: 'b'});
+                    should.not.exist(extracted.data.obj.deep.links);
                 });
             });
 
