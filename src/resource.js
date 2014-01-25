@@ -57,7 +57,12 @@ define(['./util/extractor.js', './util/uri-template.js'],
             }
 
             return http.post(this.uri, data, params).then(function(resp) {
-                return extract(resp.body, this.uri);
+                if (resp.status === 303) {
+                    var otherResource = new Resource(resp.location);
+                    return otherResource.get();
+                } else {
+                    return extract(resp.body, this.uri);
+                }
             }.bind(this));
         };
 
