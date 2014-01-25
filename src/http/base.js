@@ -28,7 +28,8 @@ define(function() {
         var type = options.type || defaultType;
         var baseOptions = {
             type:   type,
-            accept: options.accept || typeAcceptMap[type]
+            accept: options.accept || typeAcceptMap[type],
+            contentType: 'application/json'
         };
 
         function fillOptions(options) {
