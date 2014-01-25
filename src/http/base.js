@@ -62,7 +62,7 @@ define(function() {
          */
         function post(uri, data, options) {
             var allOptions = fillOptions(options);
-            if (allOptions.type == 'json') {
+            if (allOptions.type == 'json' && data !== undefined) {
                 // FIXME: let adapter do it?
                 data = JSON.stringify(data)
             }
