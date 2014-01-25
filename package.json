@@ -21,5 +21,8 @@
     "test": "node_modules/karma/bin/karma start test/karma.conf.js --single-run true"
   },
   "author": "Sébastien Cevey <seb@cine7.net>",
-  "license": "GPL"
+  "license": "GPL",
+  "dependencies": {
+    "amdefine": "~0.1.0"
+  }
 }
