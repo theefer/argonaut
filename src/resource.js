@@ -34,7 +34,7 @@ define(['./util/extractor.js', './util/uri-template.js'],
 
 
         Resource.prototype.get = function(params) {
-            return http.get(this.uri, {}, params).then(function(resp) {
+            return http.get(this.uri, undefined, params).then(function(resp) {
                 // parse returned entities
                 var extracted = extract(resp.body, this.uri);
 
