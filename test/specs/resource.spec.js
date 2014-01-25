@@ -9,6 +9,11 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
                     return {
                         then: function () {}
                     };
+                },
+                del: function (uri, data, options) {
+                    return {
+                        then: function () {}
+                    };
                 }
             };
         }
@@ -115,9 +120,9 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
                 describe('#del', function() {
 
                     it('should send a DELETE request', function() {
-                        // TODO:
-                        // http.del.should.have.been.called.with('http://example.com/api');
-                        // resource.del();
+                        sinon.spy(http, 'del');
+                        resource.del();
+                        http.del.should.have.been.calledWith('http://example.com/api');
                     });
 
                 });
