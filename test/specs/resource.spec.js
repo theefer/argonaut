@@ -117,6 +117,8 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
                         http.post.should.have.been.calledWith('http://example.com/api', 'foo');
                     });
 
+                });
+
                 describe('#del', function() {
 
                     it('should send a DELETE request', function() {
