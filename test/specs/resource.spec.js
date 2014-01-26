@@ -4,7 +4,17 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
 
         function mockHttp() {
             return {
-                // TODO: get, etc
+                // TODO: other methods
+                post: function (uri, data, options) {
+                    return {
+                        then: function () {}
+                    };
+                },
+                del: function (uri, data, options) {
+                    return {
+                        then: function () {}
+                    };
+                }
             };
         }
 
@@ -81,15 +91,40 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
                     resource = new Resource('http://example.com/api');
                 });
 
+                function whenPOST(response) {
+                    sinon.stub(http, 'post', function () {
+                        return {
+                            then: function (fn) {
+                                return fn(response);
+                            }
+                        };
+                    });
+                }
+
 
                 // TODO: get, post, put, delete
+
+                describe('#post', function () {
+
+                    it('should send a POST request', function () {
+                        whenPOST({
+                            status: 200,
+                            statusText: 'OK',
+                            contentType: 'application/json',
+                            body: {}
+                        });
+                        resource.post('foo');
+                        http.post.should.have.been.calledWith('http://example.com/api', 'foo');
+                    });
+
+                });
 
                 describe('#del', function() {
 
                     it('should send a DELETE request', function() {
-                        // TODO:
-                        // http.del.should.have.been.called.with('http://example.com/api');
-                        // resource.del();
+                        sinon.spy(http, 'del');
+                        resource.del();
+                        http.del.should.have.been.calledWith('http://example.com/api');
                     });
 
                 });
