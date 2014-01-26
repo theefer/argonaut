@@ -1,0 +1,20 @@
+{
+  "name": "argonaut",
+  "version": "0.1.0",
+  "homepage": "https://github.com/theefer/argonaut",
+  "authors": [
+    "Sébastien Cevey <seb@cine7.net>"
+  ],
+  "description": "A hypermedia client library for the argo media type",
+  "keywords": [
+    "rest", "hypermedia", "hateoas", "api", "client", "argo"
+  ],
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

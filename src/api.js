@@ -1,9 +1,17 @@
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['./resource.js', './http/base.js'], function(ResourceFactory, Http) {
+define([
+    './resource.js',
+    './http/base.js',
+    './polyfill/bind.js'
+], function(
+    ResourceFactory,
+    Http
+    // polyfills don't return anything
+) {
 
     /**
-     * @param {object} options 
+     * @param {object} options
      */
     function Api(uri, options) {
 
