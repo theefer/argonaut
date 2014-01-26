@@ -52,6 +52,7 @@ define(function() {
             var allOptions = fillOptions(options);
             if (allOptions.type == 'json') {
                 // FIXME: let adapter do it?
+                allOptions.contentType = 'application/json';
                 data = JSON.stringify(data)
             }
             return httpAdapter.put(uri, data, allOptions);
@@ -64,6 +65,7 @@ define(function() {
             var allOptions = fillOptions(options);
             if (allOptions.type == 'json') {
                 // FIXME: let adapter do it?
+                allOptions.contentType = 'application/json';
                 data = JSON.stringify(data)
             }
             return httpAdapter.post(uri, data, allOptions);
