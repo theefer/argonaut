@@ -1,4 +1,12 @@
-define(['./resource.js', './http/base.js'], function(ResourceFactory, Http) {
+define([
+    './resource.js',
+    './http/base.js',
+    './polyfill/bind.js'
+], function(
+    ResourceFactory,
+    Http
+    // polyfills don't return anything
+) {
 
     /**
      * @param {object} options 
