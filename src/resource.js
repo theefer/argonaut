@@ -1,3 +1,5 @@
+if (typeof define !== 'function') { var define = require('amdefine')(module); }
+
 define(['./util/extractor.js', './util/uri-template.js'],
        function(ExtractorFactory, uriTemplate) {
 

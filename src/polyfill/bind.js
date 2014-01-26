@@ -1,3 +1,5 @@
+if (typeof define !== 'function') { var define = require('amdefine')(module); }
+
 define(function() {
     /* Polyfill for Function.prototype.bind from MDN:
        https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Compatibility

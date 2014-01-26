@@ -1,3 +1,5 @@
+if (typeof define !== 'function') { var define = require('amdefine')(module); }
+
 define([
     './resource.js',
     './http/base.js',
@@ -9,7 +11,7 @@ define([
 ) {
 
     /**
-     * @param {object} options 
+     * @param {object} options
      */
     function Api(uri, options) {
 
