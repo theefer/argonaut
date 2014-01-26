@@ -57,7 +57,8 @@ define(['./util/extractor.js', './util/uri-template.js'],
             }
 
             return http.post(this.uri, data, params).then(function(resp) {
-                if (resp.status === 303) {
+                // Transparently redirect if appropriate
+                if (~[301, 302, 303, 201].indexOf(resp.status) && resp.location) {
                     var otherResource = new Resource(resp.location);
                     return otherResource.get();
                 } else {
