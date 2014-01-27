@@ -2,7 +2,7 @@
   "name": "argonaut",
   "version": "0.1.0",
   "homepage": "https://github.com/theefer/argonaut",
-  "main": "src/api.js",
+  "main": "./argonaut.js",
   "authors": [
     "Sébastien Cevey <seb@cine7.net>"
   ],

@@ -2,7 +2,7 @@
   "name": "argonaut-client",
   "version": "0.1.0",
   "description": "A hypermedia client library for the argo media type",
-  "main": "src/api.js",
+  "main": "./argonaut.js",
   "devDependencies": {
     "mocha": "~1.14.0",
     "karma": "~0.10.4",
