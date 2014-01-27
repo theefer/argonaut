@@ -1,5 +1,5 @@
 {
-  "name": "argonaut-client",
+  "name": "argonaut",
   "version": "0.1.0",
   "description": "A hypermedia client library for the argo media type",
   "main": "index.js",
