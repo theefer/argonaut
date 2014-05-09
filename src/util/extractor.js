@@ -41,7 +41,15 @@ define(function() {
                 var uri = val.uri || fallbackUri;
                 var data = parseData(val.data);
                 var links = val.links;
-                return new Resource(uri, data, links);
+                if (uri) {
+                    return new Resource(uri, data, links);
+                } else {
+                    // If there is no URI, it’s an entity but not a resource
+                    return {
+                        data: data,
+                        links: links
+                    };
+                }
             } else {
                 return parseData(val);
             }
