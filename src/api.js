@@ -29,7 +29,7 @@ define([
 
         this.Resource = ResourceFactory({
             // http: new Http(options.httpAdapter, options)
-            http: new Http(options.httpAdapter),
+            http: new Http(options.httpAdapter({ promiseAdapter: options.promiseAdapter })),
             syncData: options.syncData
         });
     }
