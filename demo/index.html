@@ -12,13 +12,14 @@
     });
     require(['/src/api.js', '/src/http/reqwest.js'], function(Api, httpReqwest) {
       window.Api = Api;
+      var promiseAdapter = {
+        cast: function (castValue) {
+          return window.Promise.resolve(castValue);
+        }
+      };
       window.api = new Api('http://tag.guardianapis.com/', {
-        httpAdapter: httpReqwest,
-        promiseAdapter: {
-          cast: function (castValue) {
-            return window.Promise.resolve(castValue);
-          }
-        },
+        httpAdapter: httpReqwest({ promiseAdapter: promiseAdapter }),
+        promiseAdapter: promiseAdapter,
         syncData: true
       });
 
