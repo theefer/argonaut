@@ -25,6 +25,7 @@ define(['angular'], function(angular) {
             type:        options.type,
             accept:      options.accept,
             contentType: data && options.contentType,
+            withCredentials: true
             // success: function(response) {
             //     var request = req.request;
             //     promise.resolve({
