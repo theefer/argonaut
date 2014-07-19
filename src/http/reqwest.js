@@ -21,7 +21,8 @@ define(['reqwest'], function(reqwest) {
             data:        data,
             type:        options.type,
             accept:      options.accept,
-            contentType: data && options.contentType
+            contentType: data && options.contentType,
+            crossOrigin: true
             // success: function(response) {
             //     var request = req.request;
             //     promise.resolve({
