@@ -57,7 +57,13 @@ define(['./util/extractor.js', './util/uri-template.js'],
             }
 
             return http.post(this.uri, data, params).then(function(resp) {
-                return extract(resp.body, this.uri);
+                // Transparently redirect if appropriate
+                if (~[301, 302, 303].indexOf(resp.status) || resp.status === 201 && resp.location) {
+                    var otherResource = new Resource(resp.location);
+                    return otherResource.get();
+                } else {
+                    return extract(resp.body, this.uri);
+                }
             }.bind(this));
         };
 

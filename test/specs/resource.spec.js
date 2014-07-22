@@ -5,6 +5,11 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
         function mockHttp() {
             return {
                 // TODO: other methods
+                get: function (uri, data, options) {
+                    return {
+                        then: function () {}
+                    };
+                },
                 post: function (uri, data, options) {
                     return {
                         then: function () {}
@@ -115,6 +120,21 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
                         });
                         resource.post('foo');
                         http.post.should.have.been.calledWith('http://example.com/api', 'foo');
+                    });
+
+                    it('should send a POST request and then follow the redirect', function () {
+                        whenPOST({
+                            // TODO: test other status codes?
+                            status: 301,
+                            statusText: 'See Other',
+                            contentType: 'application/json',
+                            location: 'http://example.com/api/redirect',
+                            body: {}
+                        });
+                        sinon.spy(http, 'get');
+                        resource.post('foo');
+                        http.post.should.have.been.calledWith('http://example.com/api', 'foo');
+                        http.get.should.have.been.calledWith('http://example.com/api/redirect');
                     });
 
                 });
