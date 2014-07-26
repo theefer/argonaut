@@ -17,5 +17,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "q": "~1.0.1"
+  }
 }

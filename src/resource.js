@@ -50,6 +50,10 @@ define(['./util/extractor.js', './util/uri-template.js'],
             }.bind(this));
         };
 
+        function isSuccess(status) {
+            return 200 <= status && status < 400;
+        }
+
         Resource.prototype.post = function(data, params) {
             // FIXME: or not?
             if (typeof data === 'undefined') {
@@ -57,7 +61,11 @@ define(['./util/extractor.js', './util/uri-template.js'],
             }
 
             return http.post(this.uri, data, params).then(function(resp) {
-                return extract(resp.body, this.uri);
+                if (isSuccess(resp.status)) {
+                    return extract(resp.body, this.uri);
+                } else {
+                    throw new Error('Bad status code');
+                }
             }.bind(this));
         };
 

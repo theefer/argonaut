@@ -11,12 +11,13 @@ module.exports = function(config) {
     // frameworks to use
     // frameworks: ['mocha', 'chai', 'chai-as-promised', 'requirejs'],
     // Warning: requirejs must come first, for some crazy reason
-    frameworks: ['requirejs', 'mocha', 'chai', 'sinon-chai'],
+    frameworks: ['requirejs', 'mocha', 'chai', 'sinon-chai', 'chai-as-promised'],
 
 
     // list of files / patterns to load in the browser
     files: [
       {pattern: 'src/**/*.js', included: false},
+      {pattern: 'bower_components/q/q.js', included: false},
       {pattern: 'test/**/*.spec.js', included: false},
 
       // Runs all the specs
