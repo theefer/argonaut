@@ -1,4 +1,7 @@
-define(['/base/src/resource.js'], function(ResourceFactory) {
+define([
+    '/base/src/resource.js',
+    '/base/bower_components/q/q.js'
+], function(ResourceFactory, Q) {
 
     describe('ResourceFactory', function() {
 
@@ -93,11 +96,9 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
 
                 function whenPOST(response) {
                     sinon.stub(http, 'post', function () {
-                        return {
-                            then: function (fn) {
-                                return fn(response);
-                            }
-                        };
+                        var deferred = Q.defer();
+                        deferred.resolve(response);
+                        return deferred.promise;
                     });
                 }
 
@@ -115,6 +116,17 @@ define(['/base/src/resource.js'], function(ResourceFactory) {
                         });
                         resource.post('foo');
                         http.post.should.have.been.calledWith('http://example.com/api', 'foo');
+                    });
+
+                    it('should send a POST request fail', function () {
+                        whenPOST({
+                            status: 400,
+                            statusText: 'OK',
+                            contentType: 'application/json',
+                            body: {}
+                        });
+                        var request = resource.post('foo');
+                        return request.should.eventually.be.rejectedWith('Bad status code');
                     });
 
                 });
