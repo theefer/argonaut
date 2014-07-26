@@ -5,7 +5,7 @@
   "main": "./src/argonaut.js",
   "devDependencies": {
     "mocha": "~1.14.0",
-    "karma": "~0.10.4",
+    "karma": "~0.12.8",
     "karma-chrome-launcher": "~0.1.0",
     "karma-coffee-preprocessor": "~0.1.0",
     "karma-firefox-launcher": "~0.1.0",
